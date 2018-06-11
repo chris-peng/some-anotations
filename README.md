@@ -38,14 +38,14 @@
     }
 3. 然后就可以用下面几个注解来保护你的接口了：
 
-    * @RequirePermission 满足value指定的所有权限才能通过，示例：
+    * @RequirePermission 满足指定的所有权限才能通过，示例：
 
             @RequirePermission("createUser")
             public void createUser(...)    //拥有"createUser"权限才允许调用该方法
 
             @RequirePermission({"createUser","updateUser"})
             public void userMgr(...)    //同时拥有"createUser"和"updateUser"权限才允许调用该方法
-    * @RequireAnyPermission  满足value指定的任意一项权限即可通过，示例：
+    * @RequireAnyPermission  满足指定的任意一项权限即可通过，示例：
      
             @RequireAnyPermission({@RequirePermission("createUser"),@RequirePermission("updateUser")})
             public void userMgr(...)    //拥有"createUser"和"updateUser"其中一项权限即可调用该方法
