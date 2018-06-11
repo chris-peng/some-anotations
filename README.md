@@ -1,7 +1,7 @@
 # LcMatrixPermissionAnotation
 包含几个简单的注解，用来快速实现接口（方法）级的权限控制，上手简单，可读性较强。可单独使用，也可作为其他安全框架的补充。基于Spring AOP。
 
-**如何使用：
+### 如何使用：
 
 1. 引入本项目
 2. 你需要提供自己的权限判断逻辑。实现top.lcmatrix.util.permano.IPermissionChecker接口，如：
