@@ -49,3 +49,6 @@
      
             @RequireAnyPermission({@RequirePermission("createUser"),@RequirePermission("updateUser")})
             public void userMgr(...)    //拥有"createUser"和"updateUser"其中一项权限即可调用该方法
+            
+            @RequireAnyPermission({@RequirePermission({"createUser","deleteUser"}),@RequirePermission("updateUser")})
+            public void userMgr(...)    //同时拥有"createUser"和"deleteUser"权限，或者拥有"updateUser"权限即可调用该方法
