@@ -1,5 +1,0 @@
-{"properties": [{
-  "name": "com.lenovo.stv.webutil.resolver.useNewResponseFormat",
-  "type": "java.lang.Boolean",
-  "description": "是否使用restful风格的返回数据格式"
-}]}
