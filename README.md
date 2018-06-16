@@ -3,7 +3,7 @@
 
 ### 如何使用：
 
-1. 引入本项目，并可能需要将包名修改至spring的组件扫描范围内
+1. 引入本项目，并可能需要将包名修改至spring的组件扫描范围内；
 2. 你需要提供自己的权限判断逻辑。实现top.lcmatrix.util.permano.IPermissionChecker接口，如：
 
         @Service
