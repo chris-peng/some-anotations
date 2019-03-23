@@ -6,7 +6,7 @@
 **请注意：类的内部方法调用不会被自动代理，所以这些注解只能作用在每个类的第一层方法调用上。**
 
 ### 详细介绍
-* perm系列
+* **perm系列**
 
   用来快速实现接口（方法）级的权限控制。可单独使用，也可作为其他安全框架的补充。
   
@@ -67,7 +67,7 @@
             }
         }
         
-* cache系列
+* **cache系列**
 
   最简注解形式：
     ```java
@@ -110,7 +110,7 @@
   ```
   本工程内部提供一个简单的内存缓存器HashMapCacher，其他比如redis缓存器请自己实现。
   
-* log系列
+* **log系列**
 
   最简注解形式：
     ```java
@@ -132,7 +132,7 @@
   logger需要实现top.lcmatrix.util.logano.ILogger，示例：
   ```java
       @Component  //Component注解，使之可被自动注入
-      @Primary    //Primary注解使之成为全局缓存器
+      @Primary    //Primary注解使之成为全局logger
       public class SysLogger implements ILogger{
         private static Executor executor = Executors.newCachedThreadPool();   //建议异步保存日志
 
