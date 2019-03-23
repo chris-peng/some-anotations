@@ -126,6 +126,8 @@
       //使用指定的logger记录日志，并指定module，指定action，指定detail的生成规则（用%n$s代替被注解方法的第n（从1开始）个参数（json序列化后的值））
       @Log(logger=LogServerLogger.class ,module="产品管理", action="添加产品", detail="产品名称：%1$s")
       public Product createProduct(...) { ... }
+      
+      @LogIgnore  //注解于方法参数，使用默认规则生成detail时将自动忽略该参数
     ```
   logger，你可以实现多个logger，并根据情况自由选择：
   
