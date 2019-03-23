@@ -1,11 +1,40 @@
-# LcMatrixPermissionAnotation
-包含几个简单的注解，用来快速实现接口（方法）级的权限控制，上手简单，可读性较强。可单独使用，也可作为其他安全框架的补充。基于Spring AOP。
+### 这里有一些注解，作用是：在不破坏原有代码结构的情况下，为项目灵活地增加一些切面功能。目前包含：
+* perm系列：简单的接口级权限控制
+* cache系列：方法调用结果的自动缓存管理
+* log系列：日志存储
 
-### 如何使用：
+### 详细介绍
+* perm系列
 
-1. 引入本项目，并可能需要将包名修改至spring的组件扫描范围内；
-2. 你需要提供自己的权限判断逻辑。实现top.lcmatrix.util.permano.IPermissionChecker接口，如：
+  用来快速实现接口（方法）级的权限控制。可单独使用，也可作为其他安全框架的补充。
+  
+  最简注解形式：
+  
+  ```java
+        @RequirePermission("addUser")
+        public User addUser(){ ... }    //拥有"addUser"权限才允许调用该方法
+  ```
+        
+  更复杂的注解形式：
+  
+    ```java
+        @RequirePermission({"createUser", "updateUser"})
+        public void userMgr(){ ... }    //同时拥有"createUser"和"updateUser"权限才允许调用该方法
+        
+        @RequireAnyPermission({@RequirePermission("createUser"), @RequirePermission("updateUser")})
+        public void userMgr(...)    //拥有"createUser"和"updateUser"其中一项权限即可调用该方法
 
+        @RequireAnyPermission({@RequirePermission({"createUser", "deleteUser"}), @RequirePermission("updateUser")})
+        public void userMgr(...)    //同时拥有"createUser"和"deleteUser"权限，或者拥有"updateUser"权限即可调用该方法
+        
+        //也可注解整个类
+        @RequirePermission("userMgr")
+        public class UserController{ ... }    //该类所有方法都需要拥有"userMgr"权限才可调用
+    ```
+        
+  如何鉴权：
+        你需要实现top.lcmatrix.util.permano.IPermissionChecker接口，示例：
+        
         @Service
         public class MyPermissionChecker implements IPermissionChecker{
             @Override
@@ -34,21 +63,19 @@
             public void onDeny() {
                 throw new NoPermissionException();
             }
-
         }
-3. 然后就可以用下面几个注解来保护你的接口了：
+        
+* cache系列
+        
 
-    * @RequirePermission 满足指定的所有权限才能通过，示例：
+### 如何引入：
 
-            @RequirePermission("createUser")
-            public void createUser(...)    //拥有"createUser"权限才允许调用该方法
+1. 依赖AspectJ和Spring core，所以你可能需要先引入这些依赖，如果你用SpringBoot，可以在pom.xml中增加：
 
-            @RequirePermission({"createUser","updateUser"})
-            public void userMgr(...)    //同时拥有"createUser"和"updateUser"权限才允许调用该方法
-    * @RequireAnyPermission  满足指定的任意一项权限即可通过，示例：
-     
-            @RequireAnyPermission({@RequirePermission("createUser"),@RequirePermission("updateUser")})
-            public void userMgr(...)    //拥有"createUser"和"updateUser"其中一项权限即可调用该方法
-            
-            @RequireAnyPermission({@RequirePermission({"createUser","deleteUser"}),@RequirePermission("updateUser")})
-            public void userMgr(...)    //同时拥有"createUser"和"deleteUser"权限，或者拥有"updateUser"权限即可调用该方法
+        <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>2.0.2.RELEASE</version>
+        </dependency>
+        
+2. 最简单的方式是：将some-anotations的几个包直接拷贝到你的项目下。当然也可以直接引入整个工程。注意要确保这些类在spring的组件扫描范围内。
