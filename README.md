@@ -108,7 +108,7 @@
         }
       }
   ```
-  本工程内部提供一个简单的内存缓存器HashMapCacher，其他比如redis缓存器请自己实现。
+  some-anotations内部提供一个简单的内存缓存器HashMapCacher，其他比如redis缓存器请自己实现。
   
 * **log系列**
 
