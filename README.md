@@ -10,10 +10,10 @@
   
   最简注解形式：
   
-  ```java
+    ```java
         @RequirePermission("addUser")
         public User addUser(){ ... }    //拥有"addUser"权限才允许调用该方法
-  ```
+    ```
         
   更复杂的注解形式：
   
